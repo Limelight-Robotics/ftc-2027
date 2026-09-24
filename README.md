@@ -13,5 +13,5 @@ For anyone other than Zander, please see the [Scala Documentation](https://docs.
 
 ## Code Locations
 
-All of the team's code is located in the [TeamCode](TeamCode/src/main/java/org/firstinspires/ftc/teamcode/) directory.
+All of the team's code is located in the [TeamCode](TeamCode/src/main/scala/org/firstinspires/ftc/teamcode/) directory.
 Java projects have a really long path, so just use the provided link to expand to the code completely.

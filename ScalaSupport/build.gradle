@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+    id 'scala'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.14'
+}
+
+tasks.withType(org.gradle.api.tasks.scala.ScalaCompile).configureEach {
+    scalaCompileOptions.additionalParameters = ['-target:jvm-1.8']
+}
