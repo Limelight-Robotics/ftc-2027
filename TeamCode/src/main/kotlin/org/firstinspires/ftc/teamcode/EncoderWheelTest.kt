@@ -11,31 +11,38 @@ class EncoderWheelTest : OpMode() {
     private lateinit var odometry: GoBildaPinpointDriver
     private var resetButtonWasPressed = false
 
+    fun resetOdometry() {
+        odometry.resetPosAndIMU()
+        odometry.update()
+
+        telemetry.addLine("Odometry computer reset")
+        telemetry.update()
+    }
+
     override fun init() {
         odometry = hardwareMap.get(GoBildaPinpointDriver::class.java, "odo")
         odometry.setEncoderDirections(
             GoBildaPinpointDriver.EncoderDirection.FORWARD,
-            GoBildaPinpointDriver.EncoderDirection.FORWARD
+            GoBildaPinpointDriver.EncoderDirection.REVERSED
         )
-        odometry.resetPosAndIMU()
-
-        telemetry.addLine("A resets the odometry computer (no work rn)")
-        telemetry.update()
+        odometry.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD)
+        resetOdometry()
     }
 
     override fun loop() {
-        val resetButtonPressed = gamepad1.a
-        if (resetButtonPressed && !resetButtonWasPressed) {
-            odometry.resetPosAndIMU()
+        if (gamepad1.a && !resetButtonWasPressed) {
+            resetOdometry()
         }
-        resetButtonWasPressed = resetButtonPressed
+        resetButtonWasPressed = gamepad1.a
 
         odometry.update()
         telemetry.addData("Device status", odometry.deviceStatus)
+        /*
         telemetry.addData("X encoder count", odometry.encoderX)
         telemetry.addData("Y encoder count", odometry.encoderY)
-        telemetry.addData("X position", "%.2f in", odometry.getPosX(DistanceUnit.INCH))
-        telemetry.addData("Y position", "%.2f in", odometry.getPosY(DistanceUnit.INCH))
+        */
+        telemetry.addData("X position", "%.2f m", odometry.getPosX(DistanceUnit.METER))
+        telemetry.addData("Y position", "%.2f m", odometry.getPosY(DistanceUnit.METER))
         telemetry.addData("Heading", "%.1f deg", odometry.getHeading(AngleUnit.DEGREES))
         telemetry.update()
     }

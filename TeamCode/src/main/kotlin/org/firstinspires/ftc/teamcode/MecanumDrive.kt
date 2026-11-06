@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
 @TeleOp(name = "Mecanum Drive", group = "Robot")
-class KotlinRobotTeleopMecanumDrive : OpMode() {
+class MecanumDrive : OpMode() {
     private lateinit var robot: Robot
 
     override fun init() {

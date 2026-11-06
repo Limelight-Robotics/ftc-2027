@@ -11,8 +11,8 @@ import kotlin.math.PI
 import kotlin.math.sqrt
 import kotlin.math.sign
 
-@Autonomous(name = "Chase AprilTag", group = "Robot")
-class MecanumAprilTagDistance : LinearOpMode() {
+@Autonomous(name = "Follow AprilTag", group = "Robot")
+class FollowAprilTag : LinearOpMode() {
     private val targetDistanceMeters = 1.25
     private val targetTagId = -1
     private val forwardGain = 0.80
